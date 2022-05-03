@@ -1,12 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../contexts/auth/AuthContext";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 
-export default function useVerifyAccountForm() {
-	const [searchParams] = useSearchParams();
+export default function useVerifyAccountForm(credentials) {
 	const [submitResult, setSubmitResult] = useState();
-	const { handleVerifyAccount } = useAuth();
+	const { handleVerifyAccount, handleSignIn } = useAuth();
 	const form = useForm();
 
 	const options = {
@@ -30,10 +28,17 @@ export default function useVerifyAccountForm() {
 
 	const handler = async (values) => {
 		const { code } = values;
-		const account = searchParams.get("account");
-		const result = await handleVerifyAccount(account, code);
+		const { email, password } = credentials;
 
-		setSubmitResult(result);
+		const resVerify = await handleVerifyAccount(email, code);
+
+		if (!resVerify.success) {
+			return setSubmitResult(resVerify);
+		}
+
+		const resSignIn = await handleSignIn(email, password);
+
+		setSubmitResult(resSignIn);
 	};
 
 	return { ...form, handler, submitResult, options };

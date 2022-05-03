@@ -41,7 +41,7 @@ export async function signOut() {
 
 export async function confirmSignUp(email, code) {
 	try {
-		const result = await Auth.confirmSignUp(email, code);
+		const result = await Auth.confirmSignUp(email, code, {});
 
 		return onSuccess(result, "Sign up confirmation completed successfully");
 	} catch (error) {

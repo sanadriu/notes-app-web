@@ -8,7 +8,6 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import SignUpConfirm from "./pages/SignUpConfirm";
 
 function App() {
 	return (
@@ -18,7 +17,6 @@ function App() {
 					<Route index element={<Home />} />
 					<Route path="sign-in" element={<SignIn />} />
 					<Route path="sign-up" element={<SignUp />} />
-					<Route path="verify-account" element={<SignUpConfirm />} />
 					<Route path="notes">
 						<Route index element={<Notes />} />
 						<Route path="create" element={<NoteCreate />} />

@@ -1,8 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useReducer } from "react";
+import { getCurrentSession, signIn, signOut, signUp, confirmSignUp } from "../../services/auth.service";
 import authInitialState from "../../reducers/auth/initialState";
 import authReducer from "../../reducers/auth/reducer";
 import * as authActions from "../../reducers/auth/actions";
-import { getCurrentSession, signIn, signOut, signUp, confirmSignUp } from "../../services/auth.service";
 
 const AuthContext = createContext(null);
 
@@ -44,16 +44,11 @@ export const AuthProvider = ({ children }) => {
 		return res;
 	}, [dispatch]);
 
-	const handleVerifyAccount = useCallback(
-		async (email, code) => {
-			const res = await confirmSignUp(email, code);
+	const handleVerifyAccount = useCallback(async (email, code) => {
+		const res = await confirmSignUp(email, code);
 
-			if (res.success) dispatch(authActions.authenticate());
-
-			return res;
-		},
-		[dispatch]
-	);
+		return res;
+	}, []);
 
 	const value = { handleSignUp, handleSignIn, handleSignOut, handleVerifyAccount, state };
 
