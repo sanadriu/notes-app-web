@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth/AuthContext";
+import { SignUpConsumer, SignUpProvider } from "../../contexts/auth/SignUpContext";
 
 import Layout from "../../components/Layout";
-import { SignUpConsumer, SignUpProvider } from "../../contexts/auth/SignUpContext";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import VerifyAccountForm from "../../components/VerifyAccountForm";
 

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth/AuthContext";
 import InputField from "../common/InputField";
 import Button from "../common/Button";
 import useBillingForm from "../../hooks/useBillingForm";
@@ -9,7 +8,6 @@ import InputCard from "../common/InputCard";
 
 export default function BillingForm() {
 	const navigate = useNavigate();
-	const { state: auth } = useAuth();
 	const {
 		handler,
 		handleSubmit,
@@ -22,10 +20,6 @@ export default function BillingForm() {
 	useEffect(() => {
 		if (submitResult?.success) navigate("/notes", { replace: true });
 	}, [navigate, submitResult]);
-
-	useEffect(() => {
-		if (!auth.isAuthenticated) navigate("/", { replace: true });
-	}, [navigate, auth]);
 
 	const cxForm = "flex flex-col gap-4";
 	const cxAside = classNames(

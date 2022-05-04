@@ -15,7 +15,7 @@ export default function Settings() {
 	const { state: auth } = useAuth();
 
 	useEffect(() => {
-		if (auth.isAuthenticated) navigate("/", { replace: true });
+		if (!auth.isAuthenticated) navigate("/", { replace: true });
 	}, [navigate, auth]);
 
 	const cxMain = "flex flex-col flex-grow p-4";
